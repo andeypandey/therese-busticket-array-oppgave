@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      let age = [];
+      let ticketProfit = "";
+      let ticket = "";
+      let revenue = ticketProfit;
+      let ageInput = "";
+      let moneyMade = "";
+      let totalChild = 0;
+      let totaltAdult = 0;
+      let totalElder = 0;
+      let totalEarnings = 0;
+
+      view();
+      function view() {
+        document.getElementById("app").innerHTML = /*HTML*/ `
+              <input type="text" placeholder="Skriv din alder her" onchange="ageInput=value">
+              <button onclick="ticketAge()"> kjøp</button>
+              <button onclick="dailyProfit()">Daglig Inntekt</button>
+              <p>Din alder er ${ageInput} år gammel</p>
+              <p>Du har en ${ticket} billet</p>
+             <p> Billeten din koster ${ticketProfit} Kr</p>
+              <p>Busssjoføren har tjent ${revenue} Kr</p>
+              <p>Du tjente ${moneyMade} Kr igår.`;
+      }
+
+      function ticketAge() {
+        age.push(ageInput);
+
+        revenue = 0;
+
+        console.log(totalChild);
+        for (let i = 0; i < age.length; i++) {
+          if (age[i] <= 16) {
+            ticket = "Barn";
+            ticketProfit = 30;
+            totalChild++;
+            console.log(totalChild);
+          } else if (age[i] <= 67) {
+            ticket = "Voksen";
+            ticketProfit = 50;
+            totaltAdult++;
+          } else {
+            ticket = "Honnør";
+            ticketProfit = 35;
+            totalElder++;
+          }
+
+          revenue = 30 * totalChild + 50 * totaltAdult + 35 * totalElder;
+          totalEarnings = 30 * totalChild + 50 * totaltAdult + 35 * totalElder;
+        }
+
+        view();
+      }
+      function dailyProfit() {
+        moneyMade = totalEarnings;
+        revenue = 0;
+        totalChild = 0;
+        totaltAdult = 0;
+        totalElder = 0;
+        ageInput = 0;
+        age = [];
+        ticket = "";
+        ticketProfit = 0;
+        view();
+      }
+    </script>
+  </body>
+</html>
